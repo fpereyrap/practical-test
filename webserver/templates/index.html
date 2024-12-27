@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redis and Database UI</title>
+    <script src="/static/js/script.js" defer></script>
+</head>
+<body>
+    <h1>Hi Koronet Team</h1>
+
+    <section id="redis-section">
+        <h2>Redis</h2>
+        <label for="redis-key">Key:</label>
+        <input type="text" id="redis-key">
+        <label for="redis-value">Value:</label>
+        <input type="text" id="redis-value">
+        <button onclick="setRedisKey()">Set Key</button>
+        <button onclick="getRedisKey()">Get Key</button>
+        <p id="redis-result"></p>
+    </section>
+
+    <section id="db-section">
+        <h2>Database</h2>
+        <label for="db-name">Name:</label>
+        <input type="text" id="db-name">
+        <label for="db-age">Age:</label>
+        <input type="number" id="db-age">
+        <button onclick="insertUser()">Insert User</button>
+        <button onclick="fetchUsers()">Fetch Users</button>
+        <ul id="users-list"></ul>
+    </section>
+</body>
+</html>

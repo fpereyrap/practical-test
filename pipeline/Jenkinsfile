@@ -1,0 +1,33 @@
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                sh 'docker build -t koronet/web-server .'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                sh 'docker run koronet/web-server pytest tests/'
+            }
+        }
+
+        stage('Push') {
+            steps {
+                withDockerRegistry([ credentialsId: 'docker-hub-credentials', url: 'https://index.docker.io/v1/' ]) {
+                    sh 'docker tag koronet/web-server your-dockerhub-username/koronet-web-server:latest'
+                    sh 'docker push your-dockerhub-username/koronet-web-server:latest'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh 'kubectl apply -f k8s-deployment.yaml'
+            }
+        }
+    }
+}
